@@ -4,13 +4,16 @@
 
 package prog.ud6.tresenraya;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Ana Carbonell Prieto
  */
 public class TresEnRaya {
+    public static Scanner input;
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        input = new Scanner(System.in);
     }
 }

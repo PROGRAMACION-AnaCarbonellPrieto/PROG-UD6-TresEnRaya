@@ -9,5 +9,17 @@ package prog.ud6.tresenraya;
  * @author Ana Carbonell Prieto
  */
 public enum EstadoCasilla {
-    FICHA_O, FICHA_X, VACIO
+    FICHA_O('O'),
+    FICHA_X('X'),
+    VACIO(' ');
+    
+    private char color;
+
+    EstadoCasilla(char color) {
+        this.color = color;
+    }
+    
+    public char getColor() {
+        return this.color;
+    }
 }

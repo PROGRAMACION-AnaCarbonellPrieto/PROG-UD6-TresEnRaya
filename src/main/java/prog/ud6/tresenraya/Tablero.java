@@ -28,7 +28,7 @@ public class Tablero {
         for (int i = 0; i < DIMENSION; i++) {
             System.out.printf("|%d|", i + 1);
             for (int j = 0; j < DIMENSION; j++) {
-                char ficha = (casillas[i][j] == EstadoCasilla.FICHA_O) ? 'O' : (casillas[i][j] == EstadoCasilla.FICHA_X) ? 'X' : ' ';
+                char ficha = casillas[i][j].getColor();
                 System.out.printf("%c|", ficha);
             }
             System.out.println();
@@ -73,6 +73,14 @@ public class Tablero {
         for (EstadoCasilla[] filas: casillas) {
             for (EstadoCasilla casilla: filas) {
                 if (casilla == color) cont++;
+            }
+            if (cont == DIMENSION) return true;
+            cont = 0;
+        }
+        
+        for (int i = 0; i < DIMENSION; i++) {
+            for (int j = 0; j < DIMENSION; j++) {
+                if (casillas[j][i] == color) cont++;
             }
             if (cont == DIMENSION) return true;
             cont = 0;

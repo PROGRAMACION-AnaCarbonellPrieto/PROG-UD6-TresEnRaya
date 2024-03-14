@@ -30,7 +30,7 @@ public class Jugador {
     }
     
     public void cantarVictoria() {
-        System.out.printf("¡El jugador %c es el ganador!", this.ficha.getColor());
+        System.out.printf("¡El jugador %c es el ganador!\n", this.ficha.getColor());
     }
     
     private Coordenada recogerCoordenada() {
@@ -38,6 +38,8 @@ public class Jugador {
         boolean isValid;
         
         do {
+            System.out.printf("Jugador con %c\n", this.ficha.getColor());
+            
             int fila = pedirEntero(String.format("Introduce fila [1-%d]: ", Tablero.DIMENSION));
             int columna = pedirEntero(String.format("Introduce columna [1-%d]: ", Tablero.DIMENSION));
             

@@ -17,7 +17,7 @@ public class Tablero {
     }
     
     public void mostrar() {
-        System.out.print("| |");
+        System.out.print("\n| |");
         
         for (int i = 0; i < DIMENSION; i++) {
             System.out.printf("%d|", i + 1);

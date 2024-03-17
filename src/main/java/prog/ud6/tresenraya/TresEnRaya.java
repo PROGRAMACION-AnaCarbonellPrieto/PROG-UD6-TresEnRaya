@@ -34,7 +34,8 @@ public class TresEnRaya {
     
     public void jugar() {
         do {
-            System.out.println("Vamos a jugar al \"Tres en Raya\"");
+            System.out.println("\nVamos a jugar al \"Tres en Raya\"");
+            boolean isGanado;
             int turno = 1;
 
             do {
@@ -46,19 +47,23 @@ public class TresEnRaya {
 
                 this.tablero.mostrar();
                 jugadores[turno].ponerFicha(this.tablero);
-            } while (!tablero.estaLleno() || !tablero.hayTresEnRaya());
+                
+            } while (!(isGanado = tablero.hayTresEnRaya()) && !tablero.estaLleno());
 
-            if (tablero.hayTresEnRaya()) {
+            if (isGanado) {
                 jugadores[turno].cantarVictoria();
             } else {
                 System.out.println("Empate");
             }
+            
+            tablero.mostrar();
+            tablero.vaciar();
         } while (pedirConfirmacion());
     }
     
     private boolean pedirConfirmacion() {
         do {
-            System.out.print("¿Quieres volver a jugar? [S/N]: ");
+            System.out.print("\n¿Quieres volver a jugar? [S/N]: ");
             
             char userInput = input.next().charAt(0);
             

@@ -19,14 +19,13 @@ public class Jugador {
     
     public void ponerFicha(Tablero tablero) {
         Coordenada coordenada;
-        boolean isOcupado;
         
         do {
             coordenada = recogerCoordenada();
-            isOcupado = tablero.isOcupada(coordenada);
+            if (!tablero.isOcupada(coordenada)) break;
             
-            if (isOcupado) System.out.println("¡Error! Coordenada ocupada en el tablero");
-        } while (isOcupado);
+            System.out.println("¡Error! Coordenada ocupada en el tablero");
+        } while (true);
         
         tablero.ponerFicha(coordenada, this.ficha);
     }
@@ -36,21 +35,16 @@ public class Jugador {
     }
     
     private Coordenada recogerCoordenada() {
-        Coordenada coordenada;
-        boolean isValid;
-        
         do {
             System.out.printf("\nJugador con %s\n", simbolos.obtenerSimbolo(this.ficha));
             
             int fila = TresEnRaya.pedirEntero(String.format("Introduce fila [1-%d]: ", Tablero.DIMENSION));
             int columna = TresEnRaya.pedirEntero(String.format("Introduce columna [1-%d]: ", Tablero.DIMENSION));
             
-            coordenada = new Coordenada(fila, columna);
-            isValid = coordenada.isValida(Tablero.DIMENSION);
+            Coordenada coordenada = new Coordenada(fila, columna);
+            if (coordenada.isValida(Tablero.DIMENSION)) return coordenada;
             
-            if (!isValid) System.out.println("¡Error! Introduce una coordenada válida");
-        } while (!isValid);
-        
-        return coordenada;
+            System.out.println("¡Error! Introduce una coordenada válida");
+        } while (true);
     }
 }

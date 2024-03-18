@@ -10,9 +10,11 @@ package prog.ud6.tresenraya;
  */
 public class Jugador {
     private EstadoCasilla ficha;
+    private Simbolos simbolos;
     
-    public Jugador(EstadoCasilla color) {
+    public Jugador(EstadoCasilla color, Simbolos simbolos) {
         this.ficha = color;
+        this.simbolos = simbolos;
     }
     
     public void ponerFicha(Tablero tablero) {
@@ -30,7 +32,7 @@ public class Jugador {
     }
     
     public void cantarVictoria() {
-        System.out.printf("\n¡El jugador %c es el ganador!\n", this.ficha.getColor());
+        System.out.printf("\n¡El jugador %s es el ganador!\n", simbolos.obtenerSimbolo(this.ficha));
     }
     
     private Coordenada recogerCoordenada() {
@@ -38,10 +40,10 @@ public class Jugador {
         boolean isValid;
         
         do {
-            System.out.printf("\nJugador con %c\n", this.ficha.getColor());
+            System.out.printf("\nJugador con %s\n", simbolos.obtenerSimbolo(this.ficha));
             
-            int fila = pedirEntero(String.format("Introduce fila [1-%d]: ", Tablero.DIMENSION));
-            int columna = pedirEntero(String.format("Introduce columna [1-%d]: ", Tablero.DIMENSION));
+            int fila = TresEnRaya.pedirEntero(String.format("Introduce fila [1-%d]: ", Tablero.DIMENSION));
+            int columna = TresEnRaya.pedirEntero(String.format("Introduce columna [1-%d]: ", Tablero.DIMENSION));
             
             coordenada = new Coordenada(fila, columna);
             isValid = coordenada.isValida(Tablero.DIMENSION);
@@ -50,18 +52,5 @@ public class Jugador {
         } while (!isValid);
         
         return coordenada;
-    }
-    
-    private int pedirEntero(String mensaje) {
-        do {
-            System.out.print(mensaje);
-            
-            if (TresEnRaya.input.hasNextInt()) {
-                return TresEnRaya.input.nextInt();
-            }
-            
-            System.out.println("¡Error! Debe introducir un número entero");
-            TresEnRaya.input.next();
-        } while (true);
     }
 }

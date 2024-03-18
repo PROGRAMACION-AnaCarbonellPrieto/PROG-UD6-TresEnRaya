@@ -11,8 +11,10 @@ package prog.ud6.tresenraya;
 public class Tablero {
     public final static int DIMENSION = 3;
     private EstadoCasilla[][] casillas;
+    private Simbolos simbolos;
     
-    public Tablero() {
+    public Tablero(Simbolos simbolos) {
+        this.simbolos = simbolos;
         vaciar();
     }
     
@@ -28,8 +30,8 @@ public class Tablero {
         for (int i = 0; i < DIMENSION; i++) {
             System.out.printf("|%d|", i + 1);
             for (int j = 0; j < DIMENSION; j++) {
-                char ficha = casillas[i][j].getColor();
-                System.out.printf("%c|", ficha);
+                String ficha = simbolos.obtenerSimbolo(casillas[i][j]);
+                System.out.printf("%s|", ficha);
             }
             System.out.println();
         }

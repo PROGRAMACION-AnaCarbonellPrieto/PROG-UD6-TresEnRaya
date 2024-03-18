@@ -14,12 +14,14 @@ public class TresEnRaya {
     public static Scanner input;
     private Tablero tablero;
     private Jugador[] jugadores;
+    private Simbolos simbolos;
     
     public TresEnRaya() {
-        this.tablero = new Tablero();
+        this.simbolos = new Simbolos();
+        this.tablero = new Tablero(this.simbolos);
         
-        Jugador jugador1 = new Jugador(EstadoCasilla.FICHA_O);
-        Jugador jugador2 = new Jugador(EstadoCasilla.FICHA_X);
+        Jugador jugador1 = new Jugador(EstadoCasilla.FICHA_O, this.simbolos);
+        Jugador jugador2 = new Jugador(EstadoCasilla.FICHA_X, this.simbolos);
         
         this.jugadores = new Jugador[2];
         this.jugadores[0] = jugador1;
@@ -34,7 +36,9 @@ public class TresEnRaya {
     
     public void jugar() {
         do {
-            System.out.println("\nVamos a jugar al \"Tres en Raya\"");
+            System.out.println("\nVamos a jugar al \"Tres en Raya\"\n");
+            this.simbolos.seleccionar();
+            
             boolean isGanado;
             int turno = 1;
 
@@ -59,6 +63,19 @@ public class TresEnRaya {
             tablero.mostrar();
             tablero.vaciar();
         } while (pedirConfirmacion());
+    }
+    
+    public static int pedirEntero(String mensaje) {
+        do {
+            System.out.print(mensaje);
+            
+            if (input.hasNextInt()) {
+                return input.nextInt();
+            }
+            
+            System.out.println("¡Error! Debe introducir un número entero");
+            input.next();
+        } while (true);
     }
     
     private boolean pedirConfirmacion() {

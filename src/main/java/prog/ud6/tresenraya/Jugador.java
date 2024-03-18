@@ -17,39 +17,35 @@ public class Jugador {
     
     public void ponerFicha(Tablero tablero) {
         Coordenada coordenada;
-        boolean isOcupado;
         
         do {
             coordenada = recogerCoordenada();
-            isOcupado = tablero.isOcupada(coordenada);
+            if (!tablero.isOcupada(coordenada)) break;
             
-            if (isOcupado) System.out.println("¡Error! Coordenada ocupada en el tablero");
-        } while (isOcupado);
+            System.out.println("¡Error! Coordenada ocupada en el tablero");
+        } while (true);
         
         tablero.ponerFicha(coordenada, this.ficha);
     }
     
     public void cantarVictoria() {
-        System.out.printf("\n¡El jugador %c es el ganador!\n", this.ficha.getColor());
+        System.out.printf("\n¡El jugador %s es el ganador!\n", this.ficha.toString());
     }
     
     private Coordenada recogerCoordenada() {
         Coordenada coordenada;
-        boolean isValid;
         
         do {
-            System.out.printf("\nJugador con %c\n", this.ficha.getColor());
+            System.out.printf("\nJugador con %s\n", this.ficha.toString());
             
             int fila = pedirEntero(String.format("Introduce fila [1-%d]: ", Tablero.DIMENSION));
             int columna = pedirEntero(String.format("Introduce columna [1-%d]: ", Tablero.DIMENSION));
             
             coordenada = new Coordenada(fila, columna);
-            isValid = coordenada.isValida(Tablero.DIMENSION);
+            if (coordenada.isValida(Tablero.DIMENSION)) return coordenada;
             
-            if (!isValid) System.out.println("¡Error! Introduce una coordenada válida");
-        } while (!isValid);
-        
-        return coordenada;
+            System.out.println("¡Error! Introduce una coordenada válida");
+        } while (true);
     }
     
     private int pedirEntero(String mensaje) {

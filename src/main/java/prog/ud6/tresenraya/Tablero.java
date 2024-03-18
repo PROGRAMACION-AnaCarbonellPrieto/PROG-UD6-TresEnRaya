@@ -28,8 +28,8 @@ public class Tablero {
         for (int i = 0; i < DIMENSION; i++) {
             System.out.printf("|%d|", i + 1);
             for (int j = 0; j < DIMENSION; j++) {
-                char ficha = casillas[i][j].getColor();
-                System.out.printf("%c|", ficha);
+                String ficha = casillas[i][j].toString();
+                System.out.printf("%s|", ficha);
             }
             System.out.println();
         }
